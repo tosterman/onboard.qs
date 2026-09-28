@@ -5,6 +5,7 @@ import { detectPlatformType } from '../platform/index';
 import { exportToursAndTheme, importFromFile, mergeTours } from '../tour/tour-io';
 import { createTabbedMarkdownEditor } from './markdown-toolbar';
 import { confirmDiscardChanges } from './confirm-discard';
+import { openBasicsDialog } from './qlik-basics-dialog';
 
 /**
  * Modal tour editor for edit mode.
@@ -689,6 +690,23 @@ export async function openTourEditor({ layout, model, app: _app, sheetObjects, o
     }
 
     // Attach top-level listeners
+    overlay.querySelector('.onboard-qs-editor__basics')?.addEventListener('click', () => {
+        if (selectedTourIndex < 0) {
+            alert('Add or select a tour first, then include Qlik basics.');
+            return;
+        }
+        openBasicsDialog(
+            overlay,
+            sheetObjects.filter((object) => object.id !== layout.qInfo?.qId),
+            (steps) => {
+                const tour = tours[selectedTourIndex];
+                if (!Array.isArray(tour.steps)) tour.steps = [];
+                selectedStepIndex = tour.steps.length;
+                tour.steps.push(...steps);
+                render();
+            }
+        );
+    });
     // Save button
     overlay.querySelector('.onboard-qs-editor__save')?.addEventListener('click', async () => {
         await saveToModel(model, layout, tours);
@@ -854,6 +872,7 @@ function buildEditorHTML(tours, sheetObjects, selectedTourIndex, selectedStepInd
             <div class="onboard-qs-editor__header">
                 <h2 class="onboard-qs-editor__header-title">Onboard.qs — Tour Editor</h2>
                 <div class="onboard-qs-editor__header-actions">
+                    <button class="onboard-qs-btn onboard-qs-btn--secondary onboard-qs-editor__basics">Include Qlik basics</button>
                     <button class="onboard-qs-btn onboard-qs-btn--secondary onboard-qs-btn--small onboard-qs-editor__export" title="Export tours to JSON file">&#128228; Export</button>
                     <button class="onboard-qs-btn onboard-qs-btn--secondary onboard-qs-btn--small onboard-qs-editor__import" title="Import tours from JSON file">&#128194; Import</button>
                     <button class="onboard-qs-btn onboard-qs-btn--primary onboard-qs-editor__save">Save</button>

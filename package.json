@@ -1,6 +1,6 @@
 {
     "name": "onboard-qs",
-    "version": "1.8.2",
+    "version": "1.8.3-basics.1",
     "type": "module",
     "description": "Qlik Sense extension for interactive app onboarding tours",
     "license": "MIT",
@@ -47,7 +47,8 @@
         "version:major": "npm version major --no-git-tag-version",
         "version:minor": "npm version minor --no-git-tag-version",
         "version:patch": "npm version patch --no-git-tag-version",
-        "prepare": "husky"
+        "prepare": "husky",
+        "test": "node --test test/*.test.js"
     },
     "dependencies": {
         "dompurify": "^3.4.7",
@@ -70,6 +71,7 @@
         "eslint-plugin-jsdoc": "^63.0.0",
         "globals": "^17.6.0",
         "husky": "^9.1.7",
+        "jsdom": "^26.1.0",
         "lint-staged": "^17.0.5",
         "md-to-pdf": "^5.2.5",
         "prettier": "^3.8.3"

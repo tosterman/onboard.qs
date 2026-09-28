@@ -17,6 +17,12 @@ This file tracks follow-up improvements for Onboard.qs.
 
 ## Follow-On Quality Improvements
 
+- [ ] Add automatic completion checks as a separate enhancement; Qlik basics currently use manual Next.
+- [ ] Verify Qlik basics in client-managed Sense and complete keyboard/assistive-technology testing, including native dialogs during Driver.js tours.
+- [ ] Fix upstream save failures closing the editor without preserving a visible error; distinguish completed tours from dismissed tours; coordinate auto-start timers; validate missing/ambiguous targets; round-trip root theme colors and widget settings.
+- [ ] Add property-panel entry to the full editor so a 1×1 widget remains editable (upstream issue #274).
+- [ ] Review inherited development dependency audit findings. Production dependencies pass audit after updating DOMPurify within the existing compatible range.
+
 - [ ] Add automated tests for the most critical behaviors, especially platform detection, tour transformation, import and export flows, and show-once logic.
 - [ ] Add coverage reporting or another lightweight confidence signal for future test work so regressions are easier to spot.
 - [ ] Add bundle-size regression checks or CI alerts using the existing bundle analysis output.

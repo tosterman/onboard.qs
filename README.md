@@ -28,6 +28,8 @@ _This project is maintained by [Göran Sander](https://github.com/mountaindude) 
 
 ## Features
 
+- **Qlik basics checklist (fork enhancement)** — in the existing Tour Editor, select a tour and click **Include Qlik basics**. Check filtering, clearing one/all filters, undo, creating/applying bookmarks, or exporting chart data. Choose a sheet object for filtering/export, then click **Add selected steps** and **Save**. Generated steps use the normal editor, styling, ordering, preview and import/export. They are guided practice with manual Next, not enforced task completion. Prepared toolbar selectors target Qlik Cloud; preview in your own app.
+
 - **Visual tour builder** — full-screen modal editor with three-panel layout (tours / steps / details). No need to leave the Sense app to configure tours.
 - **Multiple tours per sheet** — define intro tours, advanced walkthroughs, or feature announcements, each with independent settings.
 - **Sheet object targeting** — select any object on the current sheet from a dropdown. The extension resolves the correct DOM element at runtime.
