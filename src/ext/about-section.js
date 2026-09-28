@@ -23,22 +23,22 @@ export function aboutSection() {
             },
             description: {
                 component: 'text',
-                label: 'Interactive onboarding tours for Qlik Sense apps. Brought to you by Ptarmigan Labs.',
+                label: 'Guided onboarding for Qlik Cloud, with ready-made lessons for filtering, bookmarks and exporting data. Enhanced edition of Onboard.qs.',
             },
             homepageGit: {
                 component: 'link',
                 label: 'Documentation & Source Code',
-                url: 'https://github.com/ptarmiganlabs/onboard.qs',
+                url: 'https://github.com/tosterman/onboard.qs',
             },
             reportBug: {
                 component: 'link',
                 label: 'Report a Bug / Request a Feature',
-                url: 'https://github.com/ptarmiganlabs/onboard.qs/issues/new/choose',
+                url: 'https://github.com/tosterman/onboard.qs/issues',
             },
             homepagePlabs: {
                 component: 'link',
-                label: 'Ptarmigan Labs — Qlik Sense tools & consulting',
-                url: 'https://ptarmiganlabs.com/',
+                label: 'Original Onboard.qs — Ptarmigan Labs',
+                url: 'https://github.com/ptarmiganlabs/onboard.qs',
             },
         },
     };

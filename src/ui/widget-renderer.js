@@ -267,20 +267,20 @@ export function openAboutModal(version, buildDate) {
                 <p class="onboard-qs-about-modal__build-date">Built ${escapeHtml(buildDate)}</p>
             </div>
             <p class="onboard-qs-about-modal__tagline">
-                Interactive onboarding tours for Qlik Sense apps.
+                Guided onboarding for Qlik Cloud, with ready-made lessons for filtering, bookmarks and exporting data. Enhanced edition of Onboard.qs.
             </p>
             <div class="onboard-qs-about-modal__links">
-                <a href="https://github.com/ptarmiganlabs/onboard.qs" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/tosterman/onboard.qs" target="_blank" rel="noopener noreferrer">
                     <strong>Documentation &amp; Source Code</strong>
-                    <span>README, architecture docs, and full source on GitHub.</span>
+                    <span>Documentation and source code for this enhanced edition.</span>
                 </a>
-                <a href="https://github.com/ptarmiganlabs/onboard.qs/issues/new/choose" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/tosterman/onboard.qs/issues" target="_blank" rel="noopener noreferrer">
                     <strong>Report a Bug / Request a Feature</strong>
                     <span>Open an issue on GitHub to report problems or suggest improvements.</span>
                 </a>
-                <a href="https://ptarmiganlabs.com" target="_blank" rel="noopener noreferrer">
-                    <strong>Ptarmigan Labs</strong>
-                    <span>Qlik Sense tools, blog posts, extensions &amp; consulting.</span>
+                <a href="https://github.com/ptarmiganlabs/onboard.qs" target="_blank" rel="noopener noreferrer">
+                    <strong>Original project: Ptarmigan Labs</strong>
+                    <span>Based on Onboard.qs by Ptarmigan Labs. Original project licensed under MIT.</span>
                 </a>
             </div>
             <div class="onboard-qs-about-modal__footer">
