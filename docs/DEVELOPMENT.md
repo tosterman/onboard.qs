@@ -1,6 +1,6 @@
 # Development Guide
 
-This document covers building, extending, and contributing to the Onboard.qs extension.  
+This document covers building, extending, and contributing to the Onboard Tour extension.
 For **installation and usage**, see the main [README](../README.md).
 
 ---
@@ -13,7 +13,7 @@ For **installation and usage**, see the main [README](../README.md).
 ## Getting the Source
 
 ```bash
-git clone https://github.com/ptarmiganlabs/onboard.qs.git
+git clone https://github.com/tosterman/onboard.qs.git
 cd onboard.qs
 npm install
 ```
