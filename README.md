@@ -20,12 +20,6 @@ _This project is maintained by [Göran Sander](https://github.com/mountaindude) 
 
 ---
 
-<p align="center">
-  <img src="docs/screenshots/onboard-qs_enduser_1.gif" alt="Onboard.qs tour in action" width="700" />
-</p>
-
----
-
 ## Features
 
 - **Qlik basics checklist (fork enhancement)** — in the existing Tour Editor, select a tour and click **Include Qlik basics**. Check filtering, clearing one/all filters, undo, creating/applying bookmarks, or exporting chart data. Choose a sheet object for filtering/export, then click **Add selected steps** and **Save**. Generated steps use the normal editor, styling, ordering, preview and import/export. They are guided practice with manual Next, not enforced task completion. Prepared toolbar selectors target Qlik Cloud; preview in your own app.
