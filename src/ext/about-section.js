@@ -15,7 +15,7 @@ export function aboutSection() {
         items: {
             versionInfo: {
                 component: 'text',
-                label: `Onboard.qs v${PACKAGE_VERSION}`,
+                label: `Onboard Tour v${PACKAGE_VERSION}`,
             },
             buildDate: {
                 component: 'text',

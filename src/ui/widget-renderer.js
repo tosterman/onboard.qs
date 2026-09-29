@@ -224,10 +224,10 @@ export function renderEditPlaceholder(element, layout) {
 
     element.innerHTML = `
         <div class="onboard-qs-widget onboard-qs-widget--edit"
-             title="Onboard.qs \u2014 ${statsText}">
+             title="Onboard Tour \u2014 ${statsText}">
             <div class="onboard-qs-widget__edit-info">
                 <div class="onboard-qs-widget__icon">&#127891;</div>
-                <div class="onboard-qs-widget__title">Onboard.qs</div>
+                <div class="onboard-qs-widget__title">Onboard Tour</div>
                 <div class="onboard-qs-widget__stats">
                     ${tourCount} tour${tourCount !== 1 ? 's' : ''} &middot; ${stepCount} step${stepCount !== 1 ? 's' : ''}
                 </div>
@@ -236,7 +236,7 @@ export function renderEditPlaceholder(element, layout) {
                         Edit Tours
                     </button>
                     <button class="onboard-qs-btn onboard-qs-btn--ghost onboard-qs-about-btn"
-                            title="About Onboard.qs">
+                            title="About Onboard Tour">
                         &#9432; About
                     </button>
                 </div>
@@ -262,7 +262,7 @@ export function openAboutModal(version, buildDate) {
         <div class="onboard-qs-about-modal">
             <div class="onboard-qs-about-modal__header">
                 <span class="onboard-qs-about-modal__icon">&#127891;</span>
-                <span class="onboard-qs-about-modal__title">Onboard.qs</span>
+                <span class="onboard-qs-about-modal__title">Onboard Tour</span>
                 <span class="onboard-qs-about-modal__version">v${escapeHtml(version)}</span>
                 <p class="onboard-qs-about-modal__build-date">Built ${escapeHtml(buildDate)}</p>
             </div>

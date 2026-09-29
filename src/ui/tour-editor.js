@@ -905,7 +905,7 @@ function buildEditorHTML(tours, sheetObjects, selectedTourIndex, selectedStepInd
     return `
         <div class="onboard-qs-editor">
             <div class="onboard-qs-editor__header">
-                <h2 class="onboard-qs-editor__header-title">Onboard.qs — Tour Editor</h2>
+                <h2 class="onboard-qs-editor__header-title">Onboard Tour — Tour Editor</h2>
                 <div class="onboard-qs-editor__header-actions">
                     <button class="onboard-qs-btn onboard-qs-btn--secondary onboard-qs-editor__basics">Include Qlik basics</button>
                     <button class="onboard-qs-btn onboard-qs-btn--secondary onboard-qs-btn--small onboard-qs-editor__export" title="Export tours to JSON file">&#128228; Export</button>

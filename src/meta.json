@@ -1,5 +1,5 @@
 {
-    "name": "Onboard.qs",
+    "name": "Onboard Tour",
     "description": "Interactive onboarding tours for Qlik Sense apps",
     "type": "visualization",
     "version": "1.8.2",
