@@ -1,22 +1,15 @@
-# Onboard.qs
+# Onboard Tour
 
 Interactive onboarding tours for Qlik Sense apps — no coding required.  
-Works with both **Qlik Sense Cloud** and **Qlik Sense Enterprise on Windows** (client-managed).
+This fork is developed and tested in **Qlik Cloud**. Client-managed Qlik Sense support is inherited from the original project and has not been validated for this fork.
 
 Drop this extension onto any Qlik Sense sheet to create guided, step-by-step walkthroughs that highlight objects, explain visualisations, and help new users find their way around your apps.
 
-## ❤️ Support the project
+Maintained by Tyler Osterman as an enhanced fork of [Onboard.qs](https://github.com/ptarmiganlabs/onboard.qs), originally created by Göran Sander and Ptarmigan Labs. The original MIT license and attribution are retained.
 
-If you find this project helpful and use it in your Qlik Sense environment, please consider supporting it financially! Your sponsorship helps ensure the project's long-term sustainability and allows me to continue maintaining it, fixing bugs, and adding new features.
+**Installing in Qlik?** Download the **`onboard-qs.zip` release asset** from [this fork's releases](https://github.com/tosterman/onboard.qs/releases). Upload that ZIP directly, without extracting it. **Code → Download ZIP** and **Source code (zip)** are development source archives, not installable extensions.
 
-**👉 [Sponsor the project on GitHub](https://github.com/sponsors/ptarmiganlabs)** - Click the "Sponsor" button at the repository page to become a sponsor.
-
-- ⭐ **Star the repository** on GitHub - it helps others discover the project
-- 🍴 **Fork and contribute** - pull requests are welcome!
-- 💬 **Share your feedback** - let me know how you're using it
-- 🐛 **Report issues** - help improve stability and functionality
-
-_This project is maintained by [Göran Sander](https://github.com/mountaindude) and supported by [Ptarmigan Labs](https://ptarmiganlabs.com)._
+In the sheet editor, find **Custom objects → Tyler's Custom Extensions → Onboard Tour**. The internal extension ID and ZIP filename remain `onboard-qs` so existing app objects keep using the same extension.
 
 ---
 
@@ -49,71 +42,88 @@ _This project is maintained by [Göran Sander](https://github.com/mountaindude) 
 
 ### Prerequisites
 
-- **Qlik Sense Cloud**, or
-- **Qlik Sense Enterprise on Windows** (client-managed) — November 2025 or later. May work on older versions but not tested - your mileage may vary.
+- A Qlik Cloud tenant where you have permission to upload or update extensions.
+- Permission to edit the app and sheet where you will author tours.
 
 ### Download
 
-1. Go to [**Releases**](https://github.com/ptarmiganlabs/onboard.qs/releases) and download the latest release ZIP file (e.g. `onboard-qs-v1.3.0.zip`).
-2. Extract the downloaded ZIP file. Inside you will find:
-    - `readme.txt` — brief release notes
-    - `LICENSE` — the MIT license
-    - **`onboard-qs.zip`** — **this is the actual extension file** that you upload to Qlik Sense
+1. Open [**this fork's Releases**](https://github.com/tosterman/onboard.qs/releases).
+2. Expand **Assets** for the version you want. Fork builds may be marked **Pre-release**.
+3. Download the asset named **`onboard-qs.zip`**. Version `1.8.3-basics.5` is approximately **73 KB**.
+4. Keep the ZIP intact for upload. Do not select **Source code (zip)** or GitHub's **Code → Download ZIP**.
 
-> **Note:** The downloaded file is an outer ZIP that wraps the deployable extension ZIP. You need to extract the outer ZIP first, then use the inner `onboard-qs.zip` for installation.
+The source repository contains development tools, tests, and documentation. Demo videos and the animated GIF have been removed from the current feature branch; older source archives and Git history still contain them.
 
 ### Install in Qlik Sense
 
 **Qlik Cloud:**
 
-1. Open the **Management Console** → Extensions.
-2. Click **Add**, upload `onboard-qs.zip` (the inner ZIP from the release package).
-3. Open any app, enter edit mode, and drag **Onboard.qs** from the custom objects panel onto a sheet.
+1. Open Qlik Cloud **Administration** and go to **Extensions**.
+2. Add a new extension and upload **`onboard-qs.zip`**. If `onboard-qs` is already installed, use its **Edit** action, replace the ZIP, and click **Save**.
+3. Refresh the app, enter sheet edit mode, and open **Custom objects → Tyler's Custom Extensions**.
+4. Drag **Onboard Tour** onto the sheet.
 
 **Client-managed (QSEoW):**
 
-1. Open the **Qlik Management Console (QMC)** → Extensions.
-2. Click **Import**, select `onboard-qs.zip` (the inner ZIP from the release package).
-3. Open any app in the Sense hub, enter edit mode, and drag the **Onboard.qs** extension from the custom objects panel onto a sheet.
+The upstream project provides QMC installation support, but this fork has not been validated on client-managed deployments. Test in your own environment before rollout.
 
 ### Create Your First Tour
 
-1. With the extension on a sheet, click **Open Tour Editor** (or use the property panel).
+1. With the extension on a sheet in edit mode, click **Edit Tours** (or open the editor from the property panel).
 2. Click **+ Add Tour**, give it a name.
 3. Click **+ Add Step**, select a target object from the dropdown (or switch to **Custom CSS Selector** for non-object elements).
 4. Enter a title and description (Markdown supported).
 5. Click **Save**. Switch to analysis mode and click **Start Tour**.
 
+### Add Basic Qlik Lessons Without Writing Steps
+
+1. Open **Edit Tours** and select a tour.
+2. Click **Include Qlik basics**.
+3. Check the lessons you want: filtering, clearing one filter, clearing all filters, undoing a selection, creating a bookmark, applying a bookmark, or exporting chart data.
+4. Choose the relevant sheet objects for filtering and export.
+5. Click **Add selected steps**, customize the wording, and **Save**.
+
+For example, ask “Which servers cost the most this year?” and guide users to select 2026, sort the cost table, and save their answer as a bookmark. The checklist supplies reusable instructions; developers customize the business question and any additional steps. **Next/Done are manual: the extension does not verify that a task was completed.**
+
+### Remembering a Tour and Saving Edits
+
+- Enable **Auto-start** and **Show only once** to automatically show a tour once per browser profile and tour version. Closing the tour early counts as seen.
+- Seen state survives a normal browser restart while site storage is retained. Clearing site data, using another browser/profile, or using another device starts fresh. It is not linked to a Qlik user ID; people sharing a browser profile share this state.
+- Increase **Tour version** when you want the revised tour to auto-start again. Users can still launch a tour manually.
+- Editor changes are saved to the Qlik object when **Save** succeeds. While saving, duplicate submissions are blocked. If a save fails, the editor retains the draft and imported theme so you can retry or export a backup. An unsaved draft is not guaranteed to survive closing or refreshing the browser.
+
 ---
 
 ## Platform Support
 
-| Platform                                          | Status    |
-| ------------------------------------------------- | --------- |
-| Qlik Sense Cloud                                  | Supported |
-| Qlik Sense Enterprise on Windows (client-managed) | Supported |
+| Platform                                          | Status                                                                      |
+| ------------------------------------------------- | --------------------------------------------------------------------------- |
+| Qlik Cloud                                        | Basics workflows and installed display verified in the Adaptive test tenant |
+| Qlik Sense Enterprise on Windows (client-managed) | Inherited implementation; not validated for this fork                       |
 
 Platform detection is automatic — the extension identifies the environment and adapts accordingly.
+
+Mobile, full keyboard/assistive-technology acceptance, and broad tenant compatibility remain unverified. Small 1×1 editor access, missing targets, and competing auto-starts remain areas for further hardening. Preview tours in the target app before rollout. Screenshots below and in linked documentation may show the original upstream appearance.
 
 ---
 
 ## Toolbar Coexistence with HelpButton.qs
 
-Onboard.qs is designed to work alongside [HelpButton.qs](https://github.com/ptarmiganlabs/help-button.qs) when both extensions inject buttons into the Qlik Sense app toolbar.
+Onboard Tour is designed to work alongside [HelpButton.qs](https://github.com/ptarmiganlabs/help-button.qs) when both extensions inject buttons into the Qlik Sense app toolbar.
 
 ### Button ordering
 
 When both extensions are present on a sheet:
 
 1. **HelpButton.qs** always occupies the **leftmost** position (inserted as `firstChild` of the toolbar anchor).
-2. **Onboard.qs** detects the HelpButton container (`#hbqs-container`) and automatically positions its "Start Tour" button **immediately after** the Help button.
-3. If HelpButton.qs is **not** present, Onboard.qs takes the leftmost position instead.
+2. **Onboard Tour** detects the HelpButton container (`#hbqs-container`) and automatically positions its "Start Tour" button **immediately after** the Help button.
+3. If HelpButton.qs is **not** present, Onboard Tour takes the leftmost position instead.
 
-This ordering is stable regardless of which extension was added to the sheet first — HelpButton.qs always takes `firstChild` and Onboard.qs always checks for it before deciding where to insert.
+This ordering is stable regardless of which extension was added to the sheet first — HelpButton.qs always takes `firstChild` and Onboard Tour always checks for it before deciding where to insert.
 
 ### Multiple instances on the same sheet
 
-It is valid to place several Onboard.qs extension objects on the same sheet (e.g. different objects defining different tours). All visible tours are **merged** into a single toolbar button / dropdown. Duplicate tours (same tour ID or name) are shown only once. When an object is removed or its "Show toolbar button" toggle is turned off, its tours are unregistered and the button rebuilds from the remaining objects.
+It is valid to place several Onboard Tour extension objects on the same sheet (e.g. different objects defining different tours). All visible tours are **merged** into a single toolbar button / dropdown. Duplicate tours (same tour ID or name) are shown only once. When an object is removed or its "Show toolbar button" toggle is turned off, its tours are unregistered and the button rebuilds from the remaining objects.
 
 ---
 
@@ -164,7 +174,7 @@ All color properties use the native Qlik color-picker component. When you switch
 | Show condition | String  | —          | Controls visibility of this tour. Supports expressions (1 = show, 0 = hide).     |
 | Auto-start     | Boolean | `false`    | Start the tour automatically on sheet load                                       |
 | Show only once | Boolean | `true`     | Skip auto-start if user has already seen this tour version (uses `localStorage`) |
-| Tour version   | Integer | `1`        | Increment to reset the "seen" flag for all users                                 |
+| Tour version   | Integer | `1`        | Increment to make this version eligible for auto-start again in each browser     |
 | Show progress  | Boolean | `true`     | Display "X of Y" progress indicator in popovers                                  |
 | Allow keyboard | Boolean | `true`     | Enable arrow-key / Escape navigation                                             |
 
@@ -213,7 +223,7 @@ The following per-tour properties are configured in both the **property panel** 
 
 ## Markdown & HTML in Step Descriptions
 
-Step descriptions support **Markdown**, **raw HTML**, and **a mix of both**. The text you enter is processed by a built-in mini Markdown-to-HTML converter ([src/util/markdown.js](src/util/markdown.js)) before being injected into the driver.js popover. Since driver.js renders description content as HTML, raw HTML tags pass through and render natively.
+Step descriptions support **Markdown**, **raw HTML**, and **a mix of both**. The text you enter is processed by a built-in mini Markdown-to-HTML converter ([src/util/markdown.js](src/util/markdown.js)) before being injected into the driver.js popover. The resulting HTML is sanitized with DOMPurify before display; unsafe markup is removed.
 
 ### Supported Markdown Syntax
 
@@ -328,7 +338,7 @@ This line is a <br> continuation of the second paragraph.
 
 ### Raw HTML
 
-Since the converter preserves HTML tags, you can use **any HTML** directly in description fields:
+Supported HTML can be used directly in description fields. DOMPurify sanitization, configured media URI restrictions, and the tenant content security policy can limit what renders:
 
 ```html
 <span style="color: red; font-weight: bold;">Important!</span>
@@ -462,7 +472,7 @@ If CSP blocks iframes, a clickable thumbnail that opens the video in a new tab i
 
 ## Tour Import & Export
 
-Onboard.qs lets you selectively export tours — optionally including theme and widget settings — to a JSON file, and import them back into the same or a different Qlik app. This is useful for:
+Onboard Tour lets you selectively export tours — optionally including theme and widget settings — to a JSON file, and import them back into the same or a different Qlik app. This is useful for:
 
 - **Sharing** tour configurations across apps or tenants
 - **Backing up** tours before making major changes
@@ -564,7 +574,7 @@ To find the right selector: right-click the element in the browser → **Inspect
 
 ## Documentation & Resources
 
-- [Release blog post](https://ptarmiganlabs.com/interactive-onboarding-tours-for-qlik-sense/) — overview and demo of Onboard.qs
+- [Release blog post](https://ptarmiganlabs.com/interactive-onboarding-tours-for-qlik-sense/) — original upstream overview of Onboard.qs
 - [CHANGELOG](CHANGELOG.md) — version history and release notes
 
 ### For Developers
@@ -584,6 +594,8 @@ MIT — see [LICENSE](LICENSE).
 
 ---
 
-## Author
+## Credits and Support
 
-Ptarmigan Labs - [ptarmiganlabs.com](https://ptarmiganlabs.com)
+- **Onboard Tour fork:** Tyler Osterman — [repository and issues](https://github.com/tosterman/onboard.qs).
+- **Original Onboard.qs:** Göran Sander and [Ptarmigan Labs](https://ptarmiganlabs.com) — [upstream repository](https://github.com/ptarmiganlabs/onboard.qs).
+- The original project can be supported through [Ptarmigan Labs sponsorship](https://github.com/sponsors/ptarmiganlabs).
