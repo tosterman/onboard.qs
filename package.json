@@ -1,6 +1,6 @@
 {
     "name": "onboard-qs",
-    "version": "1.8.3-basics.2",
+    "version": "1.8.3-basics.3",
     "type": "module",
     "description": "Qlik Sense extension for interactive app onboarding tours",
     "license": "MIT",

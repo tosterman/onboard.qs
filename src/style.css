@@ -1705,3 +1705,11 @@ body.driver-active:has(.oqs-basic-practice):has([role='dialog']:not(.driver-popo
     .driver-overlay {
     visibility: hidden;
 }
+
+.onboard-qs-editor__save-status {
+    padding: 12px 20px;
+    background: #fff4e5;
+    color: #663c00;
+    border-bottom: 1px solid #edc48a;
+    font-size: 14px;
+}
