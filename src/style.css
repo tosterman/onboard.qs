@@ -1713,3 +1713,59 @@ body.driver-active:has(.oqs-basic-practice):has([role='dialog']:not(.driver-popo
     border-bottom: 1px solid #edc48a;
     font-size: 14px;
 }
+
+/* Compact cells must remain usable without Qlik's padding or hover toolbar
+   covering the launcher. Larger cells retain their configured appearance. */
+.onboard-qs-compact-icon {
+    display: none;
+}
+.oqs-compact-widget .qv-inner-object {
+    padding: 0 !important;
+}
+.oqs-compact-widget .qv-object-header,
+.oqs-compact-widget .qv-object-nav {
+    display: none !important;
+}
+.oqs-compact-widget .onboard-qs-widget {
+    padding: 0;
+    border: 0;
+}
+.oqs-compact-widget .onboard-qs-widget__edit-info,
+.oqs-compact-widget .onboard-qs-widget__edit-actions {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    padding: 0 !important;
+    gap: 0;
+}
+.oqs-compact-widget .onboard-qs-widget__title,
+.oqs-compact-widget .onboard-qs-widget__stats,
+.oqs-compact-widget .onboard-qs-widget__icon,
+.oqs-compact-widget .onboard-qs-about-btn,
+.oqs-compact-widget .onboard-qs-btn__label,
+.oqs-compact-widget .onboard-qs-btn__icon,
+.oqs-compact-widget .onboard-qs-btn__caret {
+    display: none;
+}
+.oqs-compact-widget .onboard-qs-btn {
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 0;
+    padding: 0 !important;
+    gap: 0;
+    border-radius: 4px;
+    flex-shrink: 1 !important;
+}
+.oqs-compact-widget .onboard-qs-compact-icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    max-width: 100%;
+    max-height: 100%;
+    flex-shrink: 1;
+    pointer-events: none;
+}
+.onboard-qs-btn:focus-visible {
+    outline: 2px solid #005fcc;
+    outline-offset: -2px;
+}

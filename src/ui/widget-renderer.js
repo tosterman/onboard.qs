@@ -3,6 +3,37 @@ import { resolveTheme, applyThemeToElement } from '../theme/resolve';
 import { isVisible } from '../util/visibility';
 import { sanitizeIconName } from '../util/sanitize';
 
+// Independent of Qlik icon fonts so the compact launcher always has a visible glyph.
+const compactIcon =
+    '<svg class="onboard-qs-compact-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .5c0 2-2.5 2-2.5 4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>';
+
+/**
+ * Adapt a small Qlik cell without changing persisted widget settings.
+ * Observe the outer object to avoid feedback from the padding change.
+ *
+ * @param {HTMLElement} element - Extension content container.
+ *
+ * @returns {void}
+ */
+function observeWidgetSize(element) {
+    element._onboardResizeCleanup?.();
+    const host = element.closest('article.qv-object') || element;
+    const wrapper = element.closest('.qv-gridcell') || host;
+    /** Reclassify the host after its width changes. */
+    const classify = () => {
+        const { width } = host.getBoundingClientRect();
+        wrapper.classList.toggle('oqs-compact-widget', width > 0 && width < 140);
+    };
+    const observer = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(classify) : null;
+    observer?.observe(host);
+    classify();
+    /** Disconnect sizing and restore the host when this render is removed. */
+    element._onboardResizeCleanup = () => {
+        observer?.disconnect();
+        wrapper.classList.remove('oqs-compact-widget');
+    };
+}
+
 /**
  * Widget renderer for analysis mode.
  *
@@ -24,6 +55,7 @@ import { sanitizeIconName } from '../util/sanitize';
  * @param {string} [context.codePath] - Code-path name for selector lookup.
  */
 export function renderWidget(element, layout, context) {
+    observeWidgetSize(element);
     const allTours = layout.tours || [];
     const tours = allTours.filter((t) => isVisible(t.showCondition));
     const widgetConfig = layout.widget || {};
@@ -75,8 +107,7 @@ export function renderWidget(element, layout, context) {
         : `onboard-qs-widget ${alignClasses}`;
 
     // aria-label is needed when icon-only mode hides the text content
-    const iconOnly = buttonIcon && buttonIconPosition === 'only';
-    const ariaAttr = iconOnly ? ` aria-label="${escapeAttr(buttonText)}"` : '';
+    const ariaAttr = ` aria-label="${escapeAttr(buttonText)}" title="${escapeAttr(buttonText)}"`;
 
     if (tours.length === 1) {
         // Single tour — simple button
@@ -84,6 +115,7 @@ export function renderWidget(element, layout, context) {
         element.innerHTML = `
             <div class="${containerClasses}">
                 <button class="onboard-qs-btn onboard-qs-btn--${buttonStyle} onboard-qs-start-btn"${btnSizeStyle}${ariaAttr}>
+                    ${compactIcon}
                     ${content}
                 </button>
             </div>
@@ -94,6 +126,7 @@ export function renderWidget(element, layout, context) {
         element.innerHTML = `
             <div class="${containerClasses}">
                 <button class="onboard-qs-btn onboard-qs-btn--${buttonStyle} onboard-qs-dropdown-trigger"${btnSizeStyle}${ariaAttr}>
+                    ${compactIcon}
                     ${content}
                 </button>
             </div>
@@ -216,6 +249,7 @@ function showFloatingMenu(trigger, tours, context) {
  * @param {object} layout - Extension layout.
  */
 export function renderEditPlaceholder(element, layout) {
+    observeWidgetSize(element);
     const tours = layout.tours || [];
     const tourCount = tours.length;
     const stepCount = tours.reduce((sum, t) => sum + (t.steps?.length || 0), 0);
@@ -232,8 +266,8 @@ export function renderEditPlaceholder(element, layout) {
                     ${tourCount} tour${tourCount !== 1 ? 's' : ''} &middot; ${stepCount} step${stepCount !== 1 ? 's' : ''}
                 </div>
                 <div class="onboard-qs-widget__edit-actions">
-                    <button class="onboard-qs-btn onboard-qs-btn--secondary onboard-qs-edit-tours-btn">
-                        Edit Tours
+                    <button class="onboard-qs-btn onboard-qs-btn--secondary onboard-qs-edit-tours-btn" aria-label="Edit Tours" title="Edit Tours">
+                        ${compactIcon}<span class="onboard-qs-btn__label">Edit Tours</span>
                     </button>
                     <button class="onboard-qs-btn onboard-qs-btn--ghost onboard-qs-about-btn"
                             title="About Onboard Tour">

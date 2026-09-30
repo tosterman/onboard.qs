@@ -75,7 +75,7 @@ Use step placement settings to position the instructions around the target. When
 
 ## Launch and Appearance
 
-Users can launch tours from the in-sheet button. You can also enable **Show toolbar button** to add a **Start Tour** control to the app toolbar. This is built into Onboard Tour and requires no additional extension.
+Users can launch tours from the in-sheet button. Narrow objects automatically show a compact help icon; in edit mode it opens the tour editor. Hover over the icon for its label. You can also enable **Show toolbar button** to add a **Start Tour** control to the app toolbar. This is built into Onboard Tour and requires no additional extension.
 
 When the toolbar is the preferred entry point, **Hide sheet widget** hides the extension's content in analysis mode. It does not reclaim the object's sheet grid space.
 
@@ -115,7 +115,7 @@ Review the imported tours, confirm their target objects in the destination app, 
 
 Qlik basics workflows and extension installation have been verified in a Qlik Cloud test tenant. Client-managed Qlik Sense, mobile, and full keyboard or assistive-technology acceptance have not been validated for this edition.
 
-Further hardening is needed for editor access at very small object sizes, missing targets, and competing automatic tours. Preview tours in the destination app before rollout.
+Compact 1×1 launch and editor controls have been verified in the Qlik Cloud test app. Further hardening is needed for missing targets and competing automatic tours. Preview tours in the destination app before rollout.
 
 ## Development
 
