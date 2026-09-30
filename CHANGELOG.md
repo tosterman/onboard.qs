@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.9.0 (2026-09-30)
+
+- Align the default branch, Onboard Tour branding, metadata and release artifacts.
+- Include seven editable Qlik basics lessons through the tour editor checklist.
+- Preserve drafts and imported themes on save failure; block duplicate saves.
+- Remove bundled demo videos and GIF; replace upstream-focused README with a user guide.
+- Publish a directly installable ZIP with matching README, MIT license, checksum and dependency inventory.
+- Validate package contents and version alignment in CI; release only from main, without replacing existing assets.
+
+Earlier entries below describe upstream history.
+
 ## [1.8.2](https://github.com/ptarmiganlabs/onboard.qs/compare/onboard-qs-v1.8.1...onboard-qs-v1.8.2) (2026-04-08)
 
 ### Bug Fixes

@@ -52,7 +52,7 @@ async function main() {
             }
         } catch (err) {
             if (err.code !== 'ENOENT') {
-                console.error(`Error processing directory ${dir}:`, err);
+                throw err;
             }
         }
     }

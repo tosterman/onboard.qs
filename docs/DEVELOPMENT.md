@@ -7,7 +7,7 @@ For **installation and usage**, see the main [README](../README.md).
 
 ## Prerequisites
 
-- Node.js ≥ 24.15 and npm
+- Node.js ≥ 24.15, npm, and Python 3
 - Git
 
 ## Getting the Source
@@ -15,7 +15,7 @@ For **installation and usage**, see the main [README](../README.md).
 ```bash
 git clone https://github.com/tosterman/onboard.qs.git
 cd onboard.qs
-npm install
+npm ci --ignore-scripts
 ```
 
 ## Build Commands
@@ -208,4 +208,4 @@ If you must bypass these checks, you can use `git commit --no-verify`, though th
 | [PLATFORM-DETECTION.md](PLATFORM-DETECTION.md)     | Platform detection, version fetching, adapter interface                   |
 | [SELECTORS.md](SELECTORS.md)                       | CSS selector registry design, per-platform/version lookup                 |
 | [TOUR-SYSTEM.md](TOUR-SYSTEM.md)                   | Tour data model, step resolution, driver.js integration, import/export    |
-| [VIRUS-SCAN.md](VIRUS-SCAN.md)                     | VirusTotal scanning of release artifacts                                  |
+| [VIRUS-SCAN.md](VIRUS-SCAN.md)                     | Release security checks and scanning status                                  |

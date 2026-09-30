@@ -16,6 +16,8 @@ Use it to introduce an app, teach filtering and bookmarks, or walk users through
 
 Tours provide guided practice. Users advance with **Next** and **Done**; the extension does not automatically verify that they performed each task.
 
+**[Download the installation ZIP](https://github.com/tosterman/onboard.qs/releases/latest/download/onboard-qs.zip)** | [Release notes](https://github.com/tosterman/onboard.qs/releases)
+
 ## Install or Update
 
 You need permission to manage extensions in Qlik Cloud and edit the app where you will create tours.

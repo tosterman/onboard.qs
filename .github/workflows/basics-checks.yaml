@@ -1,10 +1,13 @@
-name: Qlik basics checks
+name: Extension checks
 on:
     pull_request:
     push:
-        branches: [feat/qlik-basics-checklist]
+        branches: [main, feat/qlik-basics-checklist, codex/release-alignment]
 permissions:
     contents: read
+concurrency:
+    group: checks-${{ github.event.pull_request.number || github.ref }}
+    cancel-in-progress: true
 jobs:
     verify:
         runs-on: ubuntu-latest
@@ -14,9 +17,11 @@ jobs:
                   persist-credentials: false
             - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
               with:
-                  node-version: 24
+                  node-version: 24.15.0
                   package-manager-cache: false
             - run: npm ci --ignore-scripts
+            - run: npm audit --audit-level=high
             - run: npm run lint
             - run: npm test
-            - run: npm run build:dist
+            - run: npm run pack:prod
+            - run: python scripts/test-package.py

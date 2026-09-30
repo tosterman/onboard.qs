@@ -2,14 +2,14 @@
     "name": "Onboard Tour",
     "description": "Interactive onboarding tours for Qlik Sense apps",
     "type": "visualization",
-    "version": "1.8.2",
+    "version": "1.9.0",
     "icon": "text-image",
     "preview": "preview.png",
     "author": "Göran Sander, Ptarmigan Labs",
-    "homepage": "https://github.com/ptarmiganlabs/onboard.qs",
+    "homepage": "https://github.com/tosterman/onboard.qs",
     "keywords": "qlik-sense, visualization, onboarding, tour",
     "license": "MIT",
-    "repository": "https://github.com/ptarmiganlabs/onboard.qs",
+    "repository": "https://github.com/tosterman/onboard.qs",
     "dependencies": {
         "qlik-sense": ">=3.0.x"
     }
