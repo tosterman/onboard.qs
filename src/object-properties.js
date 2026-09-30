@@ -3,7 +3,7 @@
  */
 export default {
     showTitles: false,
-    title: 'Onboard.qs',
+    title: 'Onboard Tour',
     subtitle: '',
     footnote: '',
     widget: {

@@ -5,6 +5,7 @@ import { detectPlatformType } from '../platform/index';
 import { exportToursAndTheme, importFromFile, mergeTours } from '../tour/tour-io';
 import { createTabbedMarkdownEditor } from './markdown-toolbar';
 import { confirmDiscardChanges } from './confirm-discard';
+import { openBasicsDialog } from './qlik-basics-dialog';
 
 /**
  * Modal tour editor for edit mode.
@@ -689,10 +690,63 @@ export async function openTourEditor({ layout, model, app: _app, sheetObjects, o
     }
 
     // Attach top-level listeners
+    overlay.querySelector('.onboard-qs-editor__basics')?.addEventListener('click', () => {
+        if (selectedTourIndex < 0) {
+            alert('Add or select a tour first, then include Qlik basics.');
+            return;
+        }
+        openBasicsDialog(
+            overlay,
+            sheetObjects.filter((object) => object.id !== layout.qInfo?.qId),
+            (steps) => {
+                const tour = tours[selectedTourIndex];
+                if (!Array.isArray(tour.steps)) tour.steps = [];
+                selectedStepIndex = tour.steps.length;
+                tour.steps.push(...steps);
+                render();
+            }
+        );
+    });
     // Save button
-    overlay.querySelector('.onboard-qs-editor__save')?.addEventListener('click', async () => {
-        await saveToModel(model, layout, tours);
-        closeEditor();
+    let saving = false;
+    const saveButton = overlay.querySelector('.onboard-qs-editor__save');
+    const saveStatus = document.createElement('div');
+    saveStatus.className = 'onboard-qs-editor__save-status';
+    saveStatus.setAttribute('role', 'alert');
+    saveStatus.hidden = true;
+    overlay.querySelector('.onboard-qs-editor__header').after(saveStatus);
+    saveButton?.addEventListener('click', async () => {
+        if (saving) return;
+        saving = true;
+        saveStatus.hidden = true;
+        saveButton.textContent = 'Saving…';
+        overlay.setAttribute('aria-busy', 'true');
+        // Freeze the draft while this snapshot is being saved, preserving disabled states.
+        const controls = [...overlay.querySelectorAll('button, input, select, textarea')];
+        const disabledStates = controls.map((control) => control.disabled);
+        controls.forEach((control) => {
+            control.disabled = true;
+        });
+        const body = overlay.querySelector('.onboard-qs-editor__body');
+        body.inert = true;
+        try {
+            await saveToModel(model, layout, tours);
+            closeEditor();
+        } catch (error) {
+            logger.error('Failed to save tours:', error);
+            saveStatus.textContent =
+                'Could not save to Qlik. Your edits are still here. Check your connection and access, then choose Save to retry, or Export to keep a copy.';
+            saveStatus.hidden = false;
+        } finally {
+            saving = false;
+            controls.forEach((control, index) => {
+                control.disabled = disabledStates[index];
+            });
+            body.inert = false;
+            overlay.removeAttribute('aria-busy');
+            saveButton.textContent = 'Save';
+            if (overlay.isConnected) saveButton.focus();
+        }
     });
 
     // -- Dirty check helper --
@@ -710,6 +764,7 @@ export async function openTourEditor({ layout, model, app: _app, sheetObjects, o
      * If there are unsaved changes, show a confirmation dialog first.
      */
     const guardedClose = async () => {
+        if (saving) return;
         if (hasPendingChanges()) {
             const discard = await confirmDiscardChanges();
             if (!discard) return;
@@ -791,52 +846,50 @@ export async function openTourEditor({ layout, model, app: _app, sheetObjects, o
  * @param {object} model - Enigma model.
  * @param {object} layout - Current layout.
  * @param {Array} tours - Modified tours array.
+ *
+ * @returns {Promise<void>} Resolves after Qlik saves; rejects without clearing the draft on failure.
  */
 async function saveToModel(model, layout, tours) {
-    try {
-        const props = await model.getProperties();
+    const props = await model.getProperties();
 
-        // Deep-clone to avoid mutating the editor's in-memory data,
-        // then wrap any '='-prefixed values so Qlik evaluates them
-        // as Dollar Sign Expansion expressions.
-        const toursToSave = JSON.parse(JSON.stringify(tours));
+    // Deep-clone to avoid mutating the editor's in-memory data,
+    // then wrap any '='-prefixed values so Qlik evaluates them
+    // as Dollar Sign Expansion expressions.
+    const toursToSave = JSON.parse(JSON.stringify(tours));
 
-        // Strip duplicate Qlik-internal cId values so the property panel
-        // can render every item. Qlik auto-assigns fresh cIds on setProperties.
-        const seenCids = new Set();
-        for (const tour of toursToSave) {
-            if (tour.cId) {
-                if (seenCids.has(tour.cId)) {
-                    delete tour.cId;
-                } else {
-                    seenCids.add(tour.cId);
-                }
+    // Strip duplicate Qlik-internal cId values so the property panel
+    // can render every item. Qlik auto-assigns fresh cIds on setProperties.
+    const seenCids = new Set();
+    for (const tour of toursToSave) {
+        if (tour.cId) {
+            if (seenCids.has(tour.cId)) {
+                delete tour.cId;
+            } else {
+                seenCids.add(tour.cId);
             }
-            if (Array.isArray(tour.steps)) {
-                for (const step of tour.steps) {
-                    if (step.cId) {
-                        if (seenCids.has(step.cId)) {
-                            delete step.cId;
-                        } else {
-                            seenCids.add(step.cId);
-                        }
+        }
+        if (Array.isArray(tour.steps)) {
+            for (const step of tour.steps) {
+                if (step.cId) {
+                    if (seenCids.has(step.cId)) {
+                        delete step.cId;
+                    } else {
+                        seenCids.add(step.cId);
                     }
                 }
             }
         }
-
-        wrapExpressions(toursToSave);
-        props.tours = toursToSave;
-        // Apply imported theme if present
-        if (layout._importedTheme) {
-            props.theme = { ...props.theme, ...layout._importedTheme };
-            delete layout._importedTheme;
-        }
-        await model.setProperties(props);
-        logger.info('Tours saved to model');
-    } catch (e) {
-        logger.error('Failed to save tours:', e);
     }
+
+    wrapExpressions(toursToSave);
+    props.tours = toursToSave;
+    // Apply imported theme if present
+    if (layout._importedTheme) {
+        props.theme = { ...props.theme, ...layout._importedTheme };
+    }
+    await model.setProperties(props);
+    delete layout._importedTheme;
+    logger.info('Tours saved to model');
 }
 
 /**
@@ -852,8 +905,9 @@ function buildEditorHTML(tours, sheetObjects, selectedTourIndex, selectedStepInd
     return `
         <div class="onboard-qs-editor">
             <div class="onboard-qs-editor__header">
-                <h2 class="onboard-qs-editor__header-title">Onboard.qs — Tour Editor</h2>
+                <h2 class="onboard-qs-editor__header-title">Onboard Tour — Tour Editor</h2>
                 <div class="onboard-qs-editor__header-actions">
+                    <button class="onboard-qs-btn onboard-qs-btn--secondary onboard-qs-editor__basics">Include Qlik basics</button>
                     <button class="onboard-qs-btn onboard-qs-btn--secondary onboard-qs-btn--small onboard-qs-editor__export" title="Export tours to JSON file">&#128228; Export</button>
                     <button class="onboard-qs-btn onboard-qs-btn--secondary onboard-qs-btn--small onboard-qs-editor__import" title="Import tours from JSON file">&#128194; Import</button>
                     <button class="onboard-qs-btn onboard-qs-btn--primary onboard-qs-editor__save">Save</button>

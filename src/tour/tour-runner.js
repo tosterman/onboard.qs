@@ -53,7 +53,7 @@ function clampDialogDimension(value, fallback, min, max) {
 function getStepDialogSettings(step) {
     const size = getStepDialogSize(step);
     const settings = {
-        popoverClass: `onboard-qs-popover onboard-qs-dialog-${size}`,
+        popoverClass: `onboard-qs-popover onboard-qs-dialog-${size}${step.qlikBasic ? ' oqs-basic-practice' : ''}`,
     };
     if (size === 'custom') {
         const width = clampDialogDimension(step.customDialogWidth, 500, 200, 1200);

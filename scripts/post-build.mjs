@@ -7,10 +7,9 @@ const { buildDateString } = require('./build-date.cjs');
 
 /** Bundle metadata injected into the .qext file. */
 const BUNDLE_METADATA = {
-    id: 'dot-qs-library',
-    name: '.qs Library',
-    description:
-        'Extensions from Ptarmigan Labs that enhance the user experience with help capabilities, onboarding tours and more.',
+    id: "Tyler's Custom Extensions",
+    name: "Tyler's Custom Extensions",
+    description: 'Qlik Sense Extension bundle from Tyler Osterman',
 };
 
 /**
@@ -53,7 +52,7 @@ async function main() {
             }
         } catch (err) {
             if (err.code !== 'ENOENT') {
-                console.error(`Error processing directory ${dir}:`, err);
+                throw err;
             }
         }
     }

@@ -1,14 +1,14 @@
 {
     "name": "onboard-qs",
-    "version": "1.8.2",
+    "version": "1.9.0",
     "type": "module",
     "description": "Qlik Sense extension for interactive app onboarding tours",
     "license": "MIT",
     "author": "Göran Sander, Ptarmigan Labs",
     "bugs": {
-        "url": "https://github.com/ptarmiganlabs/onboard.qs/issues"
+        "url": "https://github.com/tosterman/onboard.qs/issues"
     },
-    "homepage": "https://github.com/ptarmiganlabs/onboard.qs#readme",
+    "homepage": "https://github.com/tosterman/onboard.qs#readme",
     "keywords": [
         "qlik",
         "qliksense",
@@ -41,20 +41,21 @@
         "post-build": "node scripts/post-build.mjs",
         "generate-pdf": "node scripts/generate-readme-pdf.mjs",
         "zip": "node scripts/zip-extension.mjs",
-        "pack:dev": "cross-env BUILD_TYPE=development npm run build && npm run sense && cross-env BUILD_TYPE=development npm run post-build && npm run generate-pdf && npm run zip",
-        "pack:prod": "cross-env BUILD_TYPE=production npm run build:dist && cross-env BUILD_TYPE=production npm run sense && cross-env BUILD_TYPE=production npm run post-build && npm run generate-pdf && npm run zip",
+        "pack:dev": "npm run build && npm run sense && npm run post-build && npm run zip",
+        "pack:prod": "cross-env BUILD_TYPE=production npm run build:dist && cross-env BUILD_TYPE=production npm run sense && cross-env BUILD_TYPE=production npm run post-build && npm run zip && python scripts/verify-package.py",
         "cloc": "cloc --exclude-dir=node_modules src/",
         "version:major": "npm version major --no-git-tag-version",
         "version:minor": "npm version minor --no-git-tag-version",
         "version:patch": "npm version patch --no-git-tag-version",
-        "prepare": "husky"
+        "prepare": "husky",
+        "test": "node --test test/*.test.js"
     },
     "dependencies": {
         "dompurify": "^3.4.7",
         "driver.js": "^1.3.1"
     },
     "devDependencies": {
-        "@cyclonedx/cyclonedx-npm": "^4.2.1",
+        "@cyclonedx/cyclonedx-npm": "^6.0.1",
         "@eslint/js": "^10.0.1",
         "@nebula.js/cli": "^7.0.1",
         "@nebula.js/cli-build": "^7.0.1",
@@ -70,6 +71,7 @@
         "eslint-plugin-jsdoc": "^63.0.0",
         "globals": "^17.6.0",
         "husky": "^9.1.7",
+        "jsdom": "^26.1.0",
         "lint-staged": "^17.0.5",
         "md-to-pdf": "^5.2.5",
         "prettier": "^3.8.3"
@@ -87,5 +89,9 @@
         "scripts/**/*.{js,mjs,cjs}": [
             "eslint --fix"
         ]
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tosterman/onboard.qs.git"
     }
 }

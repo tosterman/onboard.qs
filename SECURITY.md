@@ -1,39 +1,9 @@
 # Security Policy
 
-## Reporting a Vulnerability
+Report vulnerabilities in Onboard Tour through [private vulnerability reporting](https://github.com/tosterman/onboard.qs/security/advisories/new). Do not post exploit details, credentials, or confidential app data in public issues.
 
-If you discover a security vulnerability in Onboard.qs, please report it responsibly.
+Include the extension version, affected Qlik environment, reproduction steps, and expected impact. Reports are handled by the fork maintainer; no response-time service level is promised.
 
-**Do NOT open a public GitHub issue for security vulnerabilities.**
+This policy covers [tosterman/onboard.qs](https://github.com/tosterman/onboard.qs). Use the latest published release. Historical releases are retained for traceability and rollback, not as independently maintained versions.
 
-Instead, please use one of these methods:
-
-1. **GitHub Private Vulnerability Reporting:**
-   Go to the [Security tab](https://github.com/ptarmiganlabs/onboard.qs/security/advisories/new) of this repository and create a private security advisory.
-
-2. **Email:**
-   Send details to **security@ptarmiganlabs.com**.
-
-Please include:
-
-- A description of the vulnerability
-- Steps to reproduce the issue
-- The potential impact
-- Any suggested fix (if you have one)
-
-## Response Timeline
-
-- We monitor incoming reports continuously and will acknowledge receipt as quickly as possible.
-- We will credit reporters in the release notes once the issue has been fixed (unless you prefer to remain anonymous).
-
-## Scope
-
-This policy applies to the Onboard.qs source code hosted at
-[github.com/ptarmiganlabs/onboard.qs](https://github.com/ptarmiganlabs/onboard.qs).
-
-## Supported Versions
-
-| Version | Supported |
-| ------- | --------- |
-| Latest  | Yes       |
-| Older   | No        |
+Dependency audit and CI checks reduce risk but do not certify a deployment. Review the release notes and validate the extension in the destination environment.

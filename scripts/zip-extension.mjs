@@ -41,22 +41,17 @@ async function main() {
         ignore: ['.*', '**/.*'],
     });
 
-    // Include documentation files in the archive root (skip missing files with a warning)
-    const docFiles = ['README.md'];
+    // Required documentation must match the source checkout.
+    const docFiles = ['README.md', 'LICENSE'];
     for (const file of docFiles) {
-        try {
-            await access(file);
-            archive.file(file, { name: file });
-        } catch (err) {
-            if (err.code === 'ENOENT') {
-                console.warn(`Warning: ${file} not found, skipping`);
-            } else {
-                throw err;
-            }
-        }
+        await access(file);
+        archive.file(file, { name: file });
     }
 
     await archive.finalize();
 }
 
-main().catch(console.error);
+main().catch((err) => {
+    console.error(err);
+    process.exitCode = 1;
+});

@@ -18,7 +18,7 @@ jobs:
         name: zizmor latest via PyPI
         runs-on: ubuntu-latest
         if: >-
-            github.repository_owner == 'ptarmiganlabs' &&
+            github.repository_owner == 'tosterman' &&
             (github.event_name != 'pull_request' ||
             github.event.pull_request.head.repo.id == github.repository_id)
         permissions:

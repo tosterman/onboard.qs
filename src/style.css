@@ -1601,3 +1601,115 @@
 .oqs-md-editor-btn--discard:hover {
     background: #b91c1c;
 }
+.oqs-basics-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    background: #0006;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.oqs-basics-dialog {
+    background: white;
+    color: #222;
+    width: 560px;
+    max-width: 100%;
+    max-height: 90vh;
+    overflow: auto;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 10px 40px #0004;
+}
+.oqs-basics-dialog h2 {
+    margin: 0 0 12px;
+    font-size: 20px;
+}
+.oqs-basics-dialog p {
+    line-height: 1.5;
+}
+.oqs-basics-option {
+    padding: 10px 0;
+    border-bottom: 1px solid #e8e8e8;
+}
+.oqs-basics-option label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+.oqs-basics-option input {
+    width: 18px;
+    height: 18px;
+    accent-color: #009845;
+}
+.oqs-basics-option .oqs-basics-target {
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    margin: 10px 0 0 28px;
+    gap: 6px;
+    font-size: 12px;
+}
+.oqs-basics-option [hidden] {
+    display: none;
+}
+.oqs-basics-target select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    background: white;
+    color: #222;
+}
+.oqs-basics-note {
+    font-size: 12px;
+    color: #555;
+}
+.oqs-basics-error {
+    color: #a32323;
+}
+.oqs-basics-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 18px;
+}
+/* Practice needs access to native menus and selection confirmation outside the target. */
+body.driver-active:has(.oqs-basic-practice)
+    :is(
+        button,
+        input,
+        select,
+        textarea,
+        a,
+        [role='button'],
+        [role='menuitem'],
+        [role='cell'],
+        td,
+        th,
+        canvas
+    ),
+body.driver-active:has(.oqs-basic-practice) .qv-object svg,
+body.driver-active:has(.oqs-basic-practice) .qv-object svg * {
+    pointer-events: auto;
+}
+body.driver-active:has(.oqs-basic-practice) .driver-overlay,
+body.driver-active:has(.oqs-basic-practice) .driver-overlay * {
+    pointer-events: none !important;
+}
+body.driver-active:has(.oqs-basic-practice):has([role='dialog']:not(.driver-popover))
+    .driver-popover,
+body.driver-active:has(.oqs-basic-practice):has([role='dialog']:not(.driver-popover))
+    .driver-overlay {
+    visibility: hidden;
+}
+
+.onboard-qs-editor__save-status {
+    padding: 12px 20px;
+    background: #fff4e5;
+    color: #663c00;
+    border-bottom: 1px solid #edc48a;
+    font-size: 14px;
+}
