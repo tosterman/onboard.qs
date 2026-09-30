@@ -269,6 +269,7 @@ export default function supernova(galaxy) {
                     // (e.g. object deleted from sheet)
                     return () => {
                         if (resizeObserver) resizeObserver.disconnect();
+                        element._onboardResizeCleanup?.();
                         unregisterToolbarTours(layout.qInfo.qId);
                     };
                 }
@@ -459,6 +460,8 @@ export default function supernova(galaxy) {
                  * the component unmounts.
                  */
                 return () => {
+                    element._onboardResizeCleanup?.();
+                    element._onboardCleanup?.();
                     if (contextMenuHandler) {
                         qlikWrapper.removeEventListener('contextmenu', contextMenuHandler, true);
                         clearTimeout(rightClickTimer);
