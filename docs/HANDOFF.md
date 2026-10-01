@@ -1,6 +1,6 @@
 # HANDOFF: onboard-qs
 
-Verified 2026-10-01 against release commit `2fd86c18d72a2550f10b2ea1c2945e176b98592f`.
+Verified at code commit `a678a541996953e2b66f3c3588ea507cc52eea33` on 2026-10-01.
 
 ## Product
 Onboard Tour 1.9.1 is installed in Adaptive. An in-sheet control or compact help icon opens modal or target-attached coach marks with progress and navigation. Authors edit tours inside Qlik and can customize styling, targets, and the seven-step Qlik basics checklist.
