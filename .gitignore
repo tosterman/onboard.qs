@@ -152,3 +152,6 @@ vite.config.ts.timestamp-*
 SHA256SUMS
 *.sbom.cdx.json
 __pycache__/
+
+# Machine-local governed close input; durable project facts live in HANDOFF/project.json.
+/docs/hq/close.json
