@@ -1,0 +1,16 @@
+{
+    "area": "products",
+    "client": "",
+    "description": "Enhanced Onboard.qs Qlik extension with reusable Qlik basics lessons and interactive onboarding tours.",
+    "detected_systems": ["node", "qlik"],
+    "documents": {
+        "agents": "../../AGENTS.md",
+        "claude": "../../CLAUDE.md",
+        "decisions": "../decisions/README.md",
+        "handoff": "../HANDOFF.md"
+    },
+    "north_star": "Adaptive authors add editable Qlik basics lessons to onboarding tours and deploy a verified extension.",
+    "schema_version": 1,
+    "serves": "work",
+    "slug": "onboard-qs"
+}
